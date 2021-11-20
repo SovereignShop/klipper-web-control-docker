@@ -49,7 +49,7 @@ __Klipper with Moonraker shipped with Fluidd and/or Mainsail__
   - you can even run both in parallel!
 - only your printer.cfg is required!
   - the services start without it, so you can supply your config through the web UI
-  - you can mount your config file to /home/klippy/.config/printer.cfg, and klipper will pick it up after a restart
+  - you can mount your config file to /home/john/.config/printer.cfg, and klipper will pick it up after a restart
 
 ## Getting started
 
