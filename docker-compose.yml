@@ -26,7 +26,6 @@ services:
     # put <container_dev> into your printer.cfg
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
-      - /dev/ttyACM6:/dev/ttyACM6
 
   ##################################################################
   # Example config for a second printer on a different serial port
