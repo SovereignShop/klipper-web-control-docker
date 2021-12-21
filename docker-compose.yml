@@ -1,35 +1,21 @@
 
-
 services:
 
-  klipper:
+  kossel_1:
     image: dimalo/klipper-moonraker
     build:
       dockerfile: ./klipper/Dockerfile
       context: .
-      # args:
-      #   DEVICE_GROUP: device
-      #   DEVICE_GID: 987
-    container_name: klipper
+    container_name: kossel_1
     ports:
       - 7125:7125
     restart: unless-stopped
     volumes:
       - gcode_files:/home/klippy/gcode_files
-      # be aware to create your own branch if you mount the config folder as it will be updated on the main branch
-      # that way you can merge upstream changes to your customized configs
-      - ./config:/home/klippy/.config
+      - ./kossel_1:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
-      # - <<your_config_path>>:/home/klippy/.config
-      - ./kossel_1_printer.cfg:/home/klippy/.config/printer.cfg
-    # mount serial device - take care to grant sufficient permissions to the device: <host_dev>:<container_dev>
-    # put <container_dev> into your printer.cfg
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
-
-  ##################################################################
-  # Example config for a second printer on a different serial port
-  ##################################################################
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
 
   kossel_2:
     image: dimalo/klipper-moonraker
@@ -42,11 +28,10 @@ services:
     restart: unless-stopped
     volumes:
       - gcode_files:/home/klippy/gcode_files
-      - ./config:/home/klippy/.config
+      - ./kossel_2:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
-      - ./kossel_2_printer.cfg:/home/klippy/.config/printer.cfg
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
+      -  /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
 
   kossel_3:
     image: dimalo/klipper-moonraker
@@ -59,54 +44,114 @@ services:
     restart: unless-stopped
     volumes:
       - gcode_files:/home/klippy/gcode_files
-      - ./config:/home/klippy/.config
+      - ./kossel_3:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
-      - ./kossel_3_printer.cfg:/home/klippy/.config/printer.cfg
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00
 
+
   kossel_4:
     image: dimalo/klipper-moonraker
+    hostname: kossel_4
     build:
       dockerfile: ./klipper/Dockerfile
       context: .
     container_name: kossel_4
+    restart: unless-stopped
     ports:
       - 7128:7125
-    restart: unless-stopped
     volumes:
       - gcode_files:/home/klippy/gcode_files
-      - ./config:/home/klippy/.config
+      - ./kossel_4:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
-      - ./kossel_4_printer.cfg:/home/klippy/.config/printer.cfg
+    devices:
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00
+
+  kossel_5:
+    image: dimalo/klipper-moonraker
+    build:
+      dockerfile: ./klipper/Dockerfile
+      context: .
+    container_name: kossel_5
+    restart: unless-stopped
+    ports:
+      - 7129:7125
+    volumes:
+      - gcode_files:/home/klippy/gcode_files
+      - ./kossel_5:/home/klippy/.config
+      - moonraker_data:/home/klippy/.moonraker
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00
 
+  ender3_1:
+    image: dimalo/klipper-moonraker
+    build:
+      dockerfile: ./klipper/Dockerfile
+      context: .
+    container_name: ender3_1
+    ports:
+      - 7130:7125
+    volumes:
+      - /dev/:/dev/
+      - gcode_files:/home/klippy/gcode_files
+      - ./ender3_1:/home/klippy/.config
+      - moonraker_data:/home/klippy/.moonraker
+    devices:
+      - /dev/serial/by-path/ender3_1_device_link:/dev/serial/by-path/ender3_1_device_link
+
+  ender3_2:
+    image: dimalo/klipper-moonraker
+    build:
+      dockerfile: ./klipper/Dockerfile
+      context: .
+    container_name: ender3_2
+    ports:
+      - 7131:7125
+    volumes:
+      - /dev/:/dev/
+      - gcode_files:/home/klippy/gcode_files
+      - ./ender3_2:/home/klippy/.config
+      - moonraker_data:/home/klippy/.moonraker
+    devices:
+      - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
+
   fluidd:
-    image: cadriel/fluidd
+    image: dimalo/fluidd
     # build:
     #   dockerfile: Dockerfile
     #   context: frontend
+    # stdin_open: true # docker run -i
+    # tty: true        # docker run -
     container_name: fluidd
+    environment:
+      - KLIPPER_HOST=kossel_4
+    depends_on:
+      - kossel_4
+    links:
+      - kossel_5:kossel_5
+      - kossel_4:kossel_4
+    volumes:
+      - ./config:/home/klippy/.config
+      - ./moonraker_database:/home/klippy/.moonraker_database
     ports:
       - 8010:80
 
-  mainsail:
-    image: dimalo/mainsail
-    build:
-      dockerfile: Dockerfile
-      context: frontend
-      args:
-        FRONTEND_ZIP_URL: https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip
-    container_name: mainsail
-    ports:
-      - 8011:80
-    depends_on: 
-      - klipper
-      # - klipper_another_printer
-    links:
-      - klipper:klipper
-      # - klipper_another_printer:klipper_another_printer
+        # mainsail:
+        #   image: dimalo/mainsail
+        #   build:
+        #     dockerfile: Dockerfile
+        #     context: frontend
+        #     args:
+        #       FRONTEND_ZIP_URL: https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip
+        #   container_name: mainsail
+        #   ports:
+        #     - 8011:80
+        #   depends_on: 
+        #    - klipper
+        #   # - klipper_another_printer
+        #   # links:
+        #   #  - kossel_5:kossel_4
+        #   #  # - klipper_another_printer:klipper_another_printer
 
 volumes: 
   gcode_files:
