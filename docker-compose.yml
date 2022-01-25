@@ -15,7 +15,7 @@ services:
       - ./printers/kossel_1:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
 
   kossel_2:
     image: dimalo/klipper-moonraker
@@ -31,7 +31,7 @@ services:
       - ./printers/kossel_2:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      -  /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
 
   kossel_3:
     image: dimalo/klipper-moonraker
@@ -47,7 +47,8 @@ services:
       - ./printers/kossel_3:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00
+
 
 
   kossel_4:
@@ -65,7 +66,8 @@ services:
       - ./printers/kossel_4:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00
+
 
   kossel_5:
     image: dimalo/klipper-moonraker
@@ -81,8 +83,7 @@ services:
       - ./printers/kossel_5:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00
-
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00
   ender3_1:
     image: dimalo/klipper-moonraker
     build:
@@ -124,34 +125,17 @@ services:
     # tty: true        # docker run -
     container_name: fluidd
     environment:
-      - KLIPPER_HOST=kossel_4
-    depends_on:
-      - kossel_4
-    links:
-      - kossel_5:kossel_5
-      - kossel_4:kossel_4
+      - KLIPPER_HOST=ender3_1
+    # depends_on:
+    #   - ender3_1
+    # links:
+    #   - kossel_5:kossel_5
+    #   - kossel_4:kossel_4
     volumes:
       - ./config:/home/klippy/.config
       - ./moonraker_database:/home/klippy/.moonraker_database
     ports:
       - 8010:80
-
-        # mainsail:
-        #   image: dimalo/mainsail
-        #   build:
-        #     dockerfile: Dockerfile
-        #     context: frontend
-        #     args:
-        #       FRONTEND_ZIP_URL: https://github.com/meteyou/mainsail/releases/latest/download/mainsail.zip
-        #   container_name: mainsail
-        #   ports:
-        #     - 8011:80
-        #   depends_on: 
-        #    - klipper
-        #   # - klipper_another_printer
-        #   # links:
-        #   #  - kossel_5:kossel_4
-        #   #  # - klipper_another_printer:klipper_another_printer
 
 volumes: 
   gcode_files:
