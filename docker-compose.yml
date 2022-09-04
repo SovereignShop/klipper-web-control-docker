@@ -1,5 +1,21 @@
 services:
 
+  tumbler:
+    image: dimalo/klipper-moonraker
+    build:
+      dockerfile: ./klipper/Dockerfile
+      context: .
+    container_name: tumbler
+    ports:
+      - 7132:7125
+    restart: unless-stopped
+    volumes:
+      - gcode_files:/home/klippy/gcode_files
+      - ./printers/tumbler:/home/klippy/.config
+      - moonraker_data:/home/klippy/.moonraker
+    devices:
+      - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00
+
   kossel_1:
     image: dimalo/klipper-moonraker
     build:
