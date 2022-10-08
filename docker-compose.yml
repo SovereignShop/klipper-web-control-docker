@@ -138,7 +138,7 @@ services:
     # tty: true        # docker run -
     container_name: fluidd
     environment:
-      - KLIPPER_HOST=ender3_1
+      - KLIPPER_HOST=kossel_1
     # depends_on:
     #   - ender3_1
     # links:
