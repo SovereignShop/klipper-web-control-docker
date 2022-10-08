@@ -127,7 +127,7 @@ services:
       - ./printers/ender3_2:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
+      - ./printers/ender3_2/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
 
   fluidd:
     image: dimalo/fluidd
