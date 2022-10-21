@@ -111,7 +111,7 @@ services:
       - ./printers/ender3_1:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - /dev/serial/by-path/ender3_1_device_link:/dev/serial/by-path/ender3_1_device_link
+      - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00
 
   ender3_2:
     image: dimalo/klipper-moonraker
@@ -127,7 +127,7 @@ services:
       - ./printers/ender3_2:/home/klippy/.config
       - moonraker_data:/home/klippy/.moonraker
     devices:
-      - ./printers/ender3_2/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
+      - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
 
   fluidd:
     image: dimalo/fluidd
