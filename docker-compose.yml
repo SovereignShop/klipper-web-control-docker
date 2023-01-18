@@ -10,8 +10,8 @@ services:
       - 7132:7125
     restart: unless-stopped
     volumes:
-      - gcode_files:/home/klippy/gcode_files
-      - ./printers/tumbler:/home/klippy/.config
+      - ./printer_data:/home/klippy/printer_data
+      - ./printers/tumbler:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6054252353117882157-if00
@@ -26,9 +26,9 @@ services:
       - 7125:7125
     restart: unless-stopped
     volumes:
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_1_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_1:/home/klippy/.config
+      - ./printers/kossel_1:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
@@ -43,9 +43,9 @@ services:
       - 7126:7125
     restart: unless-stopped
     volumes:
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_2_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_2:/home/klippy/.config
+      - ./printers/kossel_2:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_databse
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
@@ -60,9 +60,9 @@ services:
       - 7127:7125
     restart: unless-stopped
     volumes:
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_3_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_3:/home/klippy/.config
+      - ./printers/kossel_3:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_06002D000C50345033313820-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_06002D000C50345033313820-if00
@@ -78,9 +78,9 @@ services:
     ports:
       - 7128:7125
     volumes:
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_4_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_4:/home/klippy/.config
+      - ./printers/kossel_4:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00
@@ -95,9 +95,9 @@ services:
     ports:
       - 7129:7125
     volumes:
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_5_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_5:/home/klippy/.config
+      - ./printers/kossel_5:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00
@@ -112,9 +112,9 @@ services:
       - 7130:7125
     volumes:
       - /dev/:/dev/
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/ender3_1_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/ender3_1:/home/klippy/.config
+      - ./printers/ender3_1:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00
@@ -129,9 +129,9 @@ services:
       - 7131:7125
     volumes:
       - /dev/:/dev/
-      - gcode_files:/home/klippy/gcode_files
+      - ./printer_data:/home/klippy/printer_data
       - ./variables/ender3_2_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/ender3_2:/home/klippy/.config
+      - ./printers/ender3_2:/home/klippy/printer_data/config
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
@@ -152,13 +152,14 @@ services:
     #   - kossel_5:kossel_5
     #   - kossel_4:kossel_4
     volumes:
-      - ./config:/home/klippy/.config
+      - ./config:/home/klippy/printer_data/config
       - ./moonraker_database:/home/klippy/.moonraker_database
     ports:
       - 8010:80
 
 volumes:
   variables:
+  printer_data:
   gcode_files:
   moonraker_data:
 
