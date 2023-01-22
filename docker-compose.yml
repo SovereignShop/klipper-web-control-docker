@@ -28,7 +28,8 @@ services:
     volumes:
       - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_1_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_1:/home/klippy/printer_data/config
+      - ./printers/kossel_1/config:/home/klippy/printer_data/config
+      - ./printers/kossel_1/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFD6055641343442671843-if00
@@ -45,7 +46,8 @@ services:
     volumes:
       - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_2_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_2:/home/klippy/printer_data/config
+      - ./printers/kossel_2/config:/home/klippy/printer_data/config
+      - ./printers/kossel_2/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_databse
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFDB055357303903721043-if00
@@ -62,7 +64,8 @@ services:
     volumes:
       - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_3_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_3:/home/klippy/printer_data/config
+      - ./printers/kossel_3/config:/home/klippy/printer_data/config
+      - ./printers/kossel_3/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_06002D000C50345033313820-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_06002D000C50345033313820-if00
@@ -80,7 +83,8 @@ services:
     volumes:
       - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_4_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_4:/home/klippy/printer_data/config
+      - ./printers/kossel_4/config:/home/klippy/printer_data/config
+      - ./printers/kossel_4/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_33FFDA055641343406612043-if00
@@ -97,7 +101,8 @@ services:
     volumes:
       - ./printer_data:/home/klippy/printer_data
       - ./variables/kossel_5_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/kossel_5:/home/klippy/printer_data/config
+      - ./printers/kossel_5/config:/home/klippy/printer_data/config
+      - ./printers/kossel_5/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00:/dev/serial/by-id/usb-Klipper_stm32f103xe_38FFD4055357303916881043-if00
@@ -114,7 +119,8 @@ services:
       - /dev/:/dev/
       - ./printer_data:/home/klippy/printer_data
       - ./variables/ender3_1_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/ender3_1:/home/klippy/printer_data/config
+      - ./printers/ender3_1/config:/home/klippy/printer_data/config
+      - ./printers/ender3_1/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_410029000450415339373620-if00
@@ -131,7 +137,8 @@ services:
       - /dev/:/dev/
       - ./printer_data:/home/klippy/printer_data
       - ./variables/ender3_2_variables.cfg:/home/klippy/klipper_variables.cfg
-      - ./printers/ender3_2:/home/klippy/printer_data/config
+      - ./printers/ender3_2/config:/home/klippy/printer_data/config
+      - ./printers/ender3_2/database:/home/klippy/printer_data/database
       - moonraker_data:/home/klippy/.moonraker_database
     devices:
       - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
