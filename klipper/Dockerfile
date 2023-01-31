@@ -36,6 +36,10 @@ RUN ${MOONRAKER_VENV_DIR}/bin/pip install wheel gpiod
 
 RUN ${MOONRAKER_VENV_DIR}/bin/pip install -r moonraker/scripts/moonraker-requirements.txt
 
+# Install timelapse
+RUN git clone https://github.com/mainsail-crew/moonraker-timelapse.git &&\
+    cp moonraker-timelapse/component/timelapse.py moonraker/moonraker/components/
+
 FROM python:3.9-slim as image
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -57,9 +61,10 @@ RUN apt-get update && \
     libsodium-dev \
     zlib1g-dev \
     python2 \
+    ffmpeg \
     python3-libgpiod && \
     sed -i -e 's/# en_GB.UTF-8 UTF-8/en_GB.UTF-8 UTF-8/' /etc/locale.gen && \
-    locale-gen && \
+    locale-gen &&\
     # Clean up
     apt-get autoremove -y && \
     apt-get clean -y && \
