@@ -143,6 +143,24 @@ services:
     devices:
       - /dev/serial/by-path/ender3_2_device_link:/dev/serial/by-path/ender3_2_device_link
 
+  kossel_6:
+    image: dimalo/klipper-moonraker
+    build:
+      dockerfile: ./klipper/Dockerfile
+      context: .
+    container_name: kossel_6
+    restart: unless-stopped
+    ports:
+      - 7132:7125
+    volumes:
+      - ./printer_data:/home/klippy/printer_data
+      - ./variables/kossel_6_variables.cfg:/home/klippy/klipper_variables.cfg
+      - ./printers/kossel_6/config:/home/klippy/printer_data/config
+      - ./printers/kossel_6/database:/home/klippy/printer_data/database
+      - moonraker_data:/home/klippy/.moonraker_database
+    devices:
+      - /dev/serial/by-id/usb-Klipper_stm32g0b1xx_34001B000450415339373620-if00:/dev/serial/by-id/usb-Klipper_stm32g0b1xx_34001B000450415339373620-if00
+
   fluidd:
     image: dimalo/fluidd
     # build:
